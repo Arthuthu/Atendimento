@@ -10,4 +10,9 @@
     <ProjectReference Include="..\AtendimentoDomain\AtendimentoDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\Application\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
