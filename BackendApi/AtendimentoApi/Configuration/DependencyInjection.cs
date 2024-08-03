@@ -1,4 +1,7 @@
-﻿using AtendimentoInfra.Context;
+﻿using AtendimentoApplication.Abstractions.Application;
+using AtendimentoApplication.Services;
+using AtendimentoInfra.Context;
+using AtendimentoInfra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AtendimentoApi.Configuration
@@ -7,11 +10,11 @@ namespace AtendimentoApi.Configuration
     {
         public static IServiceCollection AddApplicationDependencyInjection(this IServiceCollection services)
         {
-            //AppService
-            // services.AddScoped<IUserAppService, UserAppService>();
+            //Service
+            services.AddScoped<IAtendimentoService, AtendimentoService>();
 
             //Repository
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
 
             return services;
         }
