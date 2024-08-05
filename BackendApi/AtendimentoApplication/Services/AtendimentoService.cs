@@ -15,7 +15,7 @@ namespace AtendimentoApplication.Services
 
         public async Task<Atendimento?> GetAtendimentoById(Guid atendimentoId, CancellationToken ct)
         {
-            return await _repository.GetAtendimentosById(atendimentoId, ct);
+            return await _repository.GetAtendimentoById(atendimentoId, ct);
         }
 
         public async Task<List<Atendimento>?> GetAtendimentosByUserId(Guid userId, CancellationToken ct)

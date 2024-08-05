@@ -13,7 +13,7 @@ namespace AtendimentoInfra.Repositories
             _context = context;
         }
 
-        public async Task<Atendimento?> GetAtendimentosById(Guid atendimentoId, CancellationToken ct)
+        public async Task<Atendimento?> GetAtendimentoById(Guid atendimentoId, CancellationToken ct)
         {
             Atendimento? atendimento = await _context.Atendimento.FindAsync(atendimentoId, ct);
             return atendimento;
@@ -31,6 +31,25 @@ namespace AtendimentoInfra.Repositories
             await _context.SaveChangesAsync(ct);
 
             return atendimento;
+        }
+
+        public async Task<Atendimento?> Update(Atendimento atendimento, CancellationToken ct)
+        {
+            Atendimento? requestedAtendimento = await _context.Atendimento.SingleOrDefaultAsync(x => x.Id == atendimento.Id);
+
+            if (requestedAtendimento is null)
+            {
+                return null;
+            }
+
+            requestedAtendimento.Codigo = atendimento.Codigo;
+            requestedAtendimento.Versao = atendimento.Versao;
+            requestedAtendimento.Descricao = atendimento.Descricao;
+
+            _context.Atendimento.Update(requestedAtendimento);
+            await _context.SaveChangesAsync(ct);
+
+            return requestedAtendimento;
         }
 
         public async Task<bool> Delete(Guid id, CancellationToken ct)

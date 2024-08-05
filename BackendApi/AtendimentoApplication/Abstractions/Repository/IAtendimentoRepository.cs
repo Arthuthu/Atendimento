@@ -6,7 +6,7 @@ namespace AtendimentoInfra.Repositories
     {
         Task<Atendimento> Add(Atendimento atendimento, CancellationToken ct);
         Task<bool> Delete(Guid id, CancellationToken ct);
-        Task<Atendimento?> GetAtendimentosById(Guid atendimentoId, CancellationToken ct);
+        Task<Atendimento?> GetAtendimentoById(Guid atendimentoId, CancellationToken ct);
         Task<List<Atendimento>?> GetAtendimentosByUserId(Guid userId, CancellationToken ct);
     }
 }
