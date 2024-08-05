@@ -28,6 +28,24 @@ namespace AtendimentoInfra.Repositories
             return user;
         }
 
+        public async Task<User?> Update(User user, CancellationToken ct)
+        {
+            User? requestedUser = await _context.Users.SingleOrDefaultAsync(x => x.Id == user.Id);
+
+            if (requestedUser is null)
+            {
+                return null;
+            }
+
+            requestedUser.Username = user.Username;
+            requestedUser.Email = user.Username;
+
+            _context.Users.Update(requestedUser);
+            await _context.SaveChangesAsync(ct);
+
+            return requestedUser;
+        }
+
         public async Task<bool> Delete(Guid id, CancellationToken ct)
         {
             int affectedRows = await _context.Atendimento.Where(x => x.Id == id).ExecuteDeleteAsync(ct);

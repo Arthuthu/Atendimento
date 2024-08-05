@@ -38,6 +38,31 @@ namespace AtendimentoApi.Controllers.v1
             }
         }
 
+        [HttpPut]
+        [Route("v1/atendimento/update")]
+        [ProducesResponseType(typeof(AtendimentoResponse), 200),
+        ProducesResponseType(500)]
+        public async Task<IActionResult> Update([FromBody] AtendimentoRequest request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                Atendimento atendimento = _mapper.Map<Atendimento>(request);
+                Atendimento? requestedAtendimento = await _service.Update(atendimento, cancellationToken);
+
+                if (requestedAtendimento is null)
+                {
+                    return NotFound("Atendimento was not found for update");
+                }
+
+                return Ok(_mapper.Map<AtendimentoResponse>(atendimento));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"An error ocurred while updating the atendimento {ex.Message}");
+            }
+        }
+
         [HttpGet]
         [Route("v1/atendimento/get/{id}")]
 		[ProducesResponseType(typeof(AtendimentoResponse),200),

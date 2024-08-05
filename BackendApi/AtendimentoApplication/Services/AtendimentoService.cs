@@ -28,6 +28,11 @@ namespace AtendimentoApplication.Services
             return await _repository.Add(atendimento, ct);
         }
 
+        public async Task<Atendimento?> Update(Atendimento atendimento, CancellationToken ct)
+        {
+            return await _repository.Update(atendimento, ct);
+        }
+
         public async Task<bool> Delete(Guid atendimentoId, CancellationToken ct)
         {
             return await _repository.Delete(atendimentoId, ct);
