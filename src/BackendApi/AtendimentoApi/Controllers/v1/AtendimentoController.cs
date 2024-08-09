@@ -87,6 +87,10 @@ namespace AtendimentoApi.Controllers.v1
             }
         }
 
+        [HttpGet]
+        [Route("v1/atendimento/getatendimentosbyuserid/{id}")]
+        [ProducesResponseType(typeof(AtendimentoResponse), 200),
+        ProducesResponseType(404), ProducesResponseType(500)]
         public async Task<IActionResult> GetAtendimentosByUserId(Guid id, CancellationToken cancellationToken)
         {
             try

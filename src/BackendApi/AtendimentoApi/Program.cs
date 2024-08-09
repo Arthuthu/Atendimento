@@ -10,7 +10,8 @@ builder.Services.AddSwaggerGen();
 builder.Services
 .AddApplicationDependencyInjection()
 .AddApplicationDbContext(config)
-.AddCorsPolicy();
+.AddCorsPolicy()
+.AddAutoMapperConfiguration();
 
 var app = builder.Build();
 

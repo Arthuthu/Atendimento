@@ -9,6 +9,7 @@ namespace AtendimentoApi.AutoMapper
         public DomainToResponseProfile()
         {
             CreateMap<Atendimento, AtendimentoResponse>(MemberList.Destination);
+            CreateMap<User, UserResponse>(MemberList.Destination);
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿using AtendimentoApplication.Abstractions.Application;
+﻿using AtendimentoApi.AutoMapper;
+using AtendimentoApplication.Abstractions.Application;
+using AtendimentoApplication.Abstractions.Repository;
 using AtendimentoApplication.Services;
 using AtendimentoInfra.Context;
 using AtendimentoInfra.Repositories;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace AtendimentoApi.Configuration
@@ -12,9 +15,11 @@ namespace AtendimentoApi.Configuration
         {
             //Service
             services.AddScoped<IAtendimentoService, AtendimentoService>();
+            services.AddScoped<IUserService, UserService>();
 
             //Repository
             services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
@@ -28,6 +33,20 @@ namespace AtendimentoApi.Configuration
                     assembly => assembly.MigrationsAssembly(typeof(ApplicationDbContext)
                     .Assembly.FullName));
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapperConfiguration(this IServiceCollection services)
+        {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new DomainToResponseProfile());
+                mc.AddProfile(new RequestToDomainProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             return services;
         }
