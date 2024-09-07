@@ -56,5 +56,23 @@ namespace AtendimentoBlazor.Services
 
             return null;
         }
+
+        public async Task<string?> Delete(Guid id)
+        {
+            string deleteEndpoint = _config["apiUrl"] + _config["deletarUsuario"] + $"/{id}";
+            var authResult = await _client.DeleteAsync(deleteEndpoint);
+            var authContent = await authResult.Content.ReadAsStringAsync();
+
+            if (authResult.IsSuccessStatusCode is false)
+            {
+                _logger.LogError("Ocorreu um erro para deletar o usuario: {authContent}",
+                    authContent);
+
+                return await authResult.Content.ReadAsStringAsync();
+            }
+
+            return null;
+        }
+
     }
 }
