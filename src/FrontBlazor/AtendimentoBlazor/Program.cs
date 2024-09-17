@@ -1,10 +1,17 @@
+using AtendimentoBlazor.Abstractions.Services;
 using AtendimentoBlazor.Components;
+using AtendimentoBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+
+//Dependy
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddAuthorizationCore();
 
 var app = builder.Build();
 
@@ -21,7 +28,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 app.Run();

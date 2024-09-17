@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtendimentoApplication", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtendimentoDomain", "BackendApi\AtendimentoDomain\AtendimentoDomain.csproj", "{717235BA-C4C7-4BD8-9563-2E96FEC85B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtendimentoBlazor", "FrontBlazor\AtendimentoBlazor\AtendimentoBlazor.csproj", "{41795AE9-AB82-4717-B453-35D2862007EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtendimentoBlazor", "FrontBlazor\AtendimentoBlazor\AtendimentoBlazor.csproj", "{41795AE9-AB82-4717-B453-35D2862007EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

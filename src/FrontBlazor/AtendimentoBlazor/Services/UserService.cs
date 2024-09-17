@@ -1,10 +1,10 @@
-﻿using AtendimentoBlazor.Entities;
-using Microsoft.Extensions.Logging;
+﻿using AtendimentoBlazor.Abstractions.Services;
+using AtendimentoBlazor.Entities;
 using Newtonsoft.Json;
 
 namespace AtendimentoBlazor.Services
 {
-    public sealed class UserService
+    public sealed class UserService : IUserService
     {
         private readonly HttpClient _client;
         private readonly IConfiguration _config;

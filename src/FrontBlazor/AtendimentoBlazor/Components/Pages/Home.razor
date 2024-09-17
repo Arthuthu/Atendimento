@@ -1,7 +1,49 @@
 ﻿@page "/"
+@using AtendimentoBlazor.Abstractions.Services
+@using AtendimentoBlazor.Entities
+@inject IUserService userService;
+    
+<EditForm Model="User" OnValidSubmit="AddUser">
+    <div class="entrar-div">
+        <div class="entrar-label">Entrar</div>
+        <div style="margin-bottom: 20px;">
+            <div style="font-size: 1.2rem;">
+                <label>Usuario</label>
+            </div>
+            <div>
+                <InputText @bind-Value="User.Username" class="entrar-input" />
+            </div>
+        </div>
+        <div>
+            <div style="font-size: 1.2rem;">
+                <label>Senha</label>
+            </div>
+            <div>
+                <InputText @bind-Value="User.Password" class="entrar-input" />
+            </div>
+        </div>
+        <div style="text-align: center; margin: 10px 0;">
+            <button class="primary-button">Entrar</button>
+        </div>
+        <div style="text-align: center; font-size: 1.2rem;">Não possui uma conta? Registre-se</div>
+        <div style="text-align: center; margin-top: 15px;">
+            <a class="primary-button" href="/registrar">Registrar-se</a>
+        </div>
+    </div>
+</EditForm>
 
-<PageTitle>Home</PageTitle>
+@if (Resultado is not null)
+{
+    <div>Ocorreu um erro ao entrar</div>
+    <div>@Resultado</div>
+}
 
-<h1>Hello, world!</h1>
+@code {
+    User User { get; set; } = new();
+    string? Resultado { get; set; }
 
-Welcome to your new app.
+    private async Task AddUser()
+    {
+        Resultado = await userService.Add(User);
+    }
+}
