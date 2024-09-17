@@ -42,8 +42,8 @@
     User User { get; set; } = new();
     string? Resultado { get; set; }
 
-    private async Task AddUser()
+    private async Task Login()
     {
-        Resultado = await userService.Add(User);
+        
     }
 }

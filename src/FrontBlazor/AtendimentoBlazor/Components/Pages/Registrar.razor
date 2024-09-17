@@ -1,7 +1,16 @@
 ﻿@page "/registrar"
+@using AtendimentoBlazor.Abstractions.Services
+@using AtendimentoBlazor.Entities
+@inject IUserService userService;
 
 <h3>Registrar</h3>
 
 @code {
+    User User { get; set; } = new();
+    string? Resultado { get; set; }
 
+    private async Task AddUser()
+    {
+        Resultado = await userService.Add(User);
+    }
 }
