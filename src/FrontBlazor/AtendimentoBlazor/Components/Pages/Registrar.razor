@@ -3,14 +3,57 @@
 @using AtendimentoBlazor.Entities
 @inject IUserService userService;
 
-<h3>Registrar</h3>
+<EditForm Model="@User" OnValidSubmit="AddUser" FormName="RegisterForm" class="form-div">
+    <div class="form-label">Registrar</div>
+    <div style="margin-bottom: 20px;">
+        <div style="font-size: 1.2rem;">
+            <label>Usuario</label>
+        </div>
+        <div>
+            <InputText @bind-Value="User.Username" class="form-input" />
+        </div>
+    </div>
+    <div style="margin-bottom: 20px;">
+        <div style="font-size: 1.2rem;">
+            <label>Email</label>
+        </div>
+        <div>
+            <InputText @bind-Value="User.Email" class="form-input" />
+        </div>
+    </div>
+    <div>
+        <div style="font-size: 1.2rem;">
+            <label>Senha</label>
+        </div>
+        <div>
+            <InputText @bind-Value="User.Password" class="form-input" />
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 15px;">
+        <button type="submit" class="primary-button">Enviar</button>
+    </div>
+
+    @if (Enviado)
+    {
+        @if (Resultado is not null)
+        {
+            <div style="text-align: center; font-size: 1rem; color: red;">@Resultado</div>
+        }
+        else
+        {
+            <div style="text-align: center; font-size: 1rem; color: green;">Usuario registrado com sucesso</div>
+        }
+    }
+</EditForm>
 
 @code {
     User User { get; set; } = new();
     string? Resultado { get; set; }
+    bool Enviado { get; set; } = false;
 
     private async Task AddUser()
     {
         Resultado = await userService.Add(User);
+        Enviado = true;
     }
 }

@@ -9,7 +9,7 @@ body {
     background-color: var(--preto);
 }
 
-.entrar-div {
+.form-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,13 +24,13 @@ body {
     color: #FFF;
 }
 
-.entrar-label {
+.form-label {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-.entrar-input {
+.form-input {
     width: 95%;
     background-color: var(--cinza);
     padding: 5px;
@@ -41,7 +41,7 @@ body {
     border: none;
 }
 
-.entrar-input:focus {
+.form-input:focus {
     outline: none;
 }
 

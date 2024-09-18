@@ -21,16 +21,21 @@ namespace AtendimentoApi.Controllers.v1
 
         [HttpPost]
         [Route("v1/user/add")]
-        [ProducesResponseType(typeof(UserResponse), 200),
+        [ProducesResponseType(typeof(string), 400),
          ProducesResponseType(500)]
         public async Task<IActionResult> Add([FromBody] UserRequest request, CancellationToken cancellationToken)
         {
             try
             {
                 User user = _mapper.Map<User>(request);
-                await _service.Add(user, cancellationToken);
+                string? resultado = await _service.Add(user, cancellationToken);
 
-                return Ok(_mapper.Map<UserResponse>(user));
+                if (resultado is not null)
+                {
+                    return BadRequest(resultado);
+                }
+
+                return Ok(resultado);
             }
             catch (Exception ex)
             {

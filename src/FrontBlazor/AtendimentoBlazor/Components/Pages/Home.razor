@@ -3,32 +3,30 @@
 @using AtendimentoBlazor.Entities
 @inject IUserService userService;
     
-<EditForm Model="User" OnValidSubmit="AddUser">
-    <div class="entrar-div">
-        <div class="entrar-label">Entrar</div>
-        <div style="margin-bottom: 20px;">
-            <div style="font-size: 1.2rem;">
-                <label>Usuario</label>
-            </div>
-            <div>
-                <InputText @bind-Value="User.Username" class="entrar-input" />
-            </div>
+<EditForm Model="User" OnValidSubmit="Login" class="form-div">
+    <div class="form-label">Entrar</div>
+    <div style="margin-bottom: 20px;">
+        <div style="font-size: 1.2rem;">
+            <label>Usuario</label>
         </div>
         <div>
-            <div style="font-size: 1.2rem;">
-                <label>Senha</label>
-            </div>
-            <div>
-                <InputText @bind-Value="User.Password" class="entrar-input" />
-            </div>
+            <InputText @bind-Value="User.Username" class="form-input" />
         </div>
-        <div style="text-align: center; margin: 10px 0;">
-            <button class="primary-button">Entrar</button>
+    </div>
+    <div>
+        <div style="font-size: 1.2rem;">
+            <label>Senha</label>
         </div>
-        <div style="text-align: center; font-size: 1.2rem;">Não possui uma conta? Registre-se</div>
-        <div style="text-align: center; margin-top: 15px;">
-            <a class="primary-button" href="/registrar">Registrar-se</a>
+        <div>
+            <InputText @bind-Value="User.Password" class="form-input" />
         </div>
+    </div>
+    <div style="text-align: center; margin: 10px 0;">
+        <button class="primary-button">Entrar</button>
+    </div>
+    <div style="text-align: center; font-size: 1.2rem;">Não possui uma conta? Registre-se</div>
+    <div style="text-align: center; margin-top: 15px;">
+        <a class="primary-button" href="/registrar">Registrar-se</a>
     </div>
 </EditForm>
 

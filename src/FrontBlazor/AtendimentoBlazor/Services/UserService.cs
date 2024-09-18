@@ -51,7 +51,7 @@ namespace AtendimentoBlazor.Services
             {
                 _logger.LogError("Ocorreu para criar o usuario: {authContent}", authContent);
 
-                return await authResult.Content.ReadAsStringAsync(); ;
+                return await authResult.Content.ReadAsStringAsync();
             }
 
             return null;

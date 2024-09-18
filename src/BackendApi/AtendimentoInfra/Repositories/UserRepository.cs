@@ -20,12 +20,24 @@ namespace AtendimentoInfra.Repositories
             return user;
         }
 
-        public async Task<User> Add(User user, CancellationToken ct)
+        public async Task<User?> GetUserByEmail(User user)
+        {
+            User? requestedUser = await _context.Users.Where(x => x.Email == user.Email).FirstOrDefaultAsync();
+            return requestedUser;
+        }
+
+        public async Task<User?> GetUserByUsername(User user)
+        {
+            User? requestedUser = await _context.Users.Where(x => x.Username == user.Username).FirstOrDefaultAsync();
+            return requestedUser;
+        }
+
+        public async Task<User?> Add(User user, CancellationToken ct)
         {
             await _context.AddAsync(user, ct);
             await _context.SaveChangesAsync(ct);
 
-            return user;
+            return null;
         }
 
         public async Task<User?> Update(User user, CancellationToken ct)
