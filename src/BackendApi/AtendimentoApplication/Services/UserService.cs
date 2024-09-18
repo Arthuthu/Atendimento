@@ -61,6 +61,11 @@ namespace AtendimentoApplication.Services
                 return "Ja existe um usuário cadastrado com esse username";
             }
 
+            if (!user.Email.Contains('@'))
+            {
+                return "Informe um email valido";
+            }
+
             return null;
         }
     }
