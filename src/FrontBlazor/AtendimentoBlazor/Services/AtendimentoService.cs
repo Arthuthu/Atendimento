@@ -18,7 +18,7 @@ namespace AtendimentoBlazor.Services
 
         public async Task<Atendimento?> GetById(Guid id)
         {
-            string buscarPorIdEndpoint = _config["apiUrl"] + _config["getAtendimentoById"] + $"/{id}";
+            string buscarPorIdEndpoint = _config["APIUrl"] + _config["GetAtendimentoById"] + $"/{id}";
             var authResult = await _client.GetAsync(buscarPorIdEndpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
@@ -44,7 +44,7 @@ namespace AtendimentoBlazor.Services
                 new KeyValuePair<string, string>("Descricao", atendimento.Descricao)
             ]);
 
-            string addEndpoint = _config["apiUrl"] + _config["addAtendimento"];
+            string addEndpoint = _config["APIUrl"] + _config["AddAtendimento"];
             HttpResponseMessage authResult = await _client.PostAsync(addEndpoint, data);
             string authContent = await authResult.Content.ReadAsStringAsync();
 
@@ -60,7 +60,7 @@ namespace AtendimentoBlazor.Services
 
         public async Task<string?> Delete(Guid id)
         {
-            string deleteEndpoint = _config["apiUrl"] + _config["deletarAtendimento"] + $"/{id}";
+            string deleteEndpoint = _config["APIUrl"] + _config["DeletarAtendimento"] + $"/{id}";
             var authResult = await _client.DeleteAsync(deleteEndpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 

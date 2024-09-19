@@ -1,6 +1,7 @@
 ﻿using AtendimentoBlazor.Abstractions.Services;
 using AtendimentoBlazor.Entities;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace AtendimentoBlazor.Services
 {
@@ -17,7 +18,7 @@ namespace AtendimentoBlazor.Services
         }
         public async Task<User?> GetById(Guid id)
         {
-            string buscarPorIdEndpoint = _config["apiUrl"] + _config["getUserById"] + $"/{id}";
+            string buscarPorIdEndpoint = _config["APIUrl"] + _config["GetUserById"] + $"/{id}";
             var authResult = await _client.GetAsync(buscarPorIdEndpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
@@ -36,14 +37,11 @@ namespace AtendimentoBlazor.Services
 
         public async Task<string?> Add(User user)
         {
-            using FormUrlEncodedContent data = new
-            ([
-                new KeyValuePair<string, string>("Username", user.Username),
-                new KeyValuePair<string, string>("Password", user.Password),
-                new KeyValuePair<string, string>("Email", user.Email)
-            ]);
+            string jsonContent = JsonConvert.SerializeObject(user);
 
-            string addEndpoint = _config["apiUrl"] + _config["addUser"];
+            using var data = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            string addEndpoint = _config["APIUrl"] + _config["AddUser"];
             HttpResponseMessage authResult = await _client.PostAsync(addEndpoint, data);
             string authContent = await authResult.Content.ReadAsStringAsync();
 
@@ -59,7 +57,7 @@ namespace AtendimentoBlazor.Services
 
         public async Task<string?> Delete(Guid id)
         {
-            string deleteEndpoint = _config["apiUrl"] + _config["deletarUsuario"] + $"/{id}";
+            string deleteEndpoint = _config["APIUrl"] + _config["DeletarUsuario"] + $"/{id}";
             var authResult = await _client.DeleteAsync(deleteEndpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
