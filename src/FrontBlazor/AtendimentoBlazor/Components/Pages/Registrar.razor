@@ -3,11 +3,11 @@
 @using AtendimentoBlazor.Entities
 @inject IUserService userService;
 
-<EditForm Model="@User" OnValidSubmit="AddUser" FormName="RegisterForm" class="form-div">
+<EditForm Model="User" OnSubmit="AddUser" FormName="RegisterForm" class="form-div">
     <div class="form-label">Registrar</div>
     <div style="margin-bottom: 20px;">
         <div style="font-size: 1.2rem;">
-            <label>Usuario</label>
+            <label>Usuario</label> 
         </div>
         <div>
             <InputText @bind-Value="User.Username" class="form-input" />
@@ -32,21 +32,22 @@
     <div style="text-align: center; margin-top: 15px;">
         <button type="submit" class="primary-button">Enviar</button>
     </div>
-
-    @if (Enviado)
-    {
-        @if (Resultado is not null)
-        {
-            <div style="text-align: center; font-size: 1rem; color: red;">@Resultado</div>
-        }
-        else
-        {
-            <div style="text-align: center; font-size: 1rem; color: green;">Usuario registrado com sucesso</div>
-        }
-    }
 </EditForm>
 
+@if (Enviado)
+{
+    @if (Resultado is not null)
+    {
+        <div style="text-align: center; font-size: 1rem; color: red;">@Resultado</div>
+    }
+    else
+    {
+        <div style="text-align: center; font-size: 1rem; color: green;">Usuario registrado com sucesso</div>
+    }
+}
+
 @code {
+    [SupplyParameterFromForm]
     User User { get; set; } = new();
     string? Resultado { get; set; }
     bool Enviado { get; set; } = false;
