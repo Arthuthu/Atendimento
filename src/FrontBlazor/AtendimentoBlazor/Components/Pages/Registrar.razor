@@ -26,7 +26,7 @@
             <label>Senha</label>
         </div>
         <div>
-            <InputText @bind-Value="User.Password" class="form-input" />
+            <InputText type="password" @bind-Value="User.Password" class="form-input" />
         </div>
     </div>
     <div style="text-align: center; margin-top: 15px;">
@@ -36,13 +36,13 @@
 
 @if (Enviado)
 {
-    @if (Resultado is not null)
+    @if (Resultado is null)
     {
-        <div style="text-align: center; font-size: 1rem; color: red;">@Resultado</div>
+        <div class="form-mensagem-sucesso">Usuario registrado com sucesso</div>
     }
     else
     {
-        <div style="text-align: center; font-size: 1rem; color: green;">Usuario registrado com sucesso</div>
+        <div class="form-mensagme-erro">@Resultado</div>
     }
 }
 

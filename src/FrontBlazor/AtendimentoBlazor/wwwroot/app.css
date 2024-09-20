@@ -45,6 +45,24 @@ body {
     outline: none;
 }
 
+.form-mensagem-sucesso,
+.form-mensagme-erro {
+    text-align: center;
+    color: red;
+    font-family: 'Segoe UI';
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.form-mensagem-sucesso {
+    color: #33c217;
+}
+
+.form-mensagem-erro {
+    color: #fa0303;
+}
+
 .primary-button {
     font-family: 'Segoe UI';
     font-weight: 500;
