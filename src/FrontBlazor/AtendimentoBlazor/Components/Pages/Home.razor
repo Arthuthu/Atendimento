@@ -2,15 +2,16 @@
 @using AtendimentoBlazor.Abstractions.Services
 @using AtendimentoBlazor.Entities
 @inject IUserService userService;
+@inject IAuthService authService;
     
-<EditForm Model="User" OnValidSubmit="Login" class="form-div">
+<EditForm Model="AuthUser" OnValidSubmit="Login" class="form-div">
     <div class="form-label">Entrar</div>
     <div style="margin-bottom: 20px;">
         <div style="font-size: 1.2rem;">
             <label>Usuario</label>
         </div>
         <div>
-            <InputText @bind-Value="User.Username" class="form-input" />
+            <InputText @bind-Value="AuthUser.Username" class="form-input" />
         </div>
     </div>
     <div>
@@ -18,7 +19,7 @@
             <label>Senha</label>
         </div>
         <div>
-            <InputText @bind-Value="User.Password" class="form-input" />
+            <InputText @bind-Value="AuthUser.Password" class="form-input" />
         </div>
     </div>
     <div style="text-align: center; margin: 10px 0;">
@@ -37,11 +38,11 @@
 }
 
 @code {
-    User User { get; set; } = new();
+    Auth AuthUser { get; set; } = new();
     string? Resultado { get; set; }
 
     private async Task Login()
     {
-        
+        string? token = await authService.Login(AuthUser);
     }
 }

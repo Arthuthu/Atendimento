@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AtendimentoApi.Controllers.v1
 {
-    [Route("api/v1/[controller]")]
+    [Route("/v1/[controller]")]
     [ApiController]
     public class AuthController : Controller
     {

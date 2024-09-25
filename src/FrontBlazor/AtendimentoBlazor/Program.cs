@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 //Dependy
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthorizationCore();
 
