@@ -10,6 +10,9 @@ namespace AtendimentoApi.AutoMapper
         {
             CreateMap<AtendimentoRequest, Atendimento>(MemberList.Destination);
             CreateMap<UserRequest, User>(MemberList.Destination);
+            CreateMap<AuthRequest, Auth>(MemberList.Destination);
+
+            CreateMap<AuthRequest, User>(MemberList.Destination);
         }
     }
 }
