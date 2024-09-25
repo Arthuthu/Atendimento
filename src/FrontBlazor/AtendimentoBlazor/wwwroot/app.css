@@ -81,3 +81,14 @@ body {
     background-color: var(--cinza);
     color: #FFF;
 }
+
+.segoe-ui-padrao {
+    font-family: 'Segoe UI';
+    font-weight: 600;
+    font-size: 1rem;
+    color: #FFF;
+}
+
+text-center {
+    text-align: center;
+}

@@ -1,7 +1,10 @@
 ﻿@page "/registrar"
+
 @using AtendimentoBlazor.Abstractions.Services
 @using AtendimentoBlazor.Entities
+
 @inject IUserService userService;
+@inject NavigationManager navManager;
 
 <EditForm Model="User" OnSubmit="AddUser" FormName="RegisterForm" class="form-div">
     <div class="form-label">Registrar</div>
@@ -56,5 +59,10 @@
     {
         Resultado = await userService.Add(User);
         Enviado = true;
+
+        if (Resultado is null)
+        {
+            navManager.NavigateTo("/registroconcluido");
+        }
     }
 }
