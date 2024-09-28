@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AtendimentoApi.Controllers.v1
 {
-    [Route("/v1/[controller]")]
     [ApiController]
     public class AuthController : Controller
     {
@@ -20,6 +19,7 @@ namespace AtendimentoApi.Controllers.v1
             _mapper = mapper;
         }
 
+        [Route("v1/auth/login")]
         [HttpPost, AllowAnonymous, Route("/login")]
         [ProducesResponseType(typeof(string), 200),
         ProducesResponseType(404)]
