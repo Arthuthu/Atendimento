@@ -19,11 +19,10 @@ namespace AtendimentoApi.Controllers.v1
             _mapper = mapper;
         }
 
-        [Route("v1/auth/login")]
-        [HttpPost, AllowAnonymous, Route("/login")]
+        [HttpPost, AllowAnonymous, Route("v1/auth/login")]
         [ProducesResponseType(typeof(string), 200),
         ProducesResponseType(404)]
-        public async Task<IActionResult> Login([FromForm] AuthRequest authRequest,
+        public async Task<IActionResult> Login([FromBody] AuthRequest authRequest,
             CancellationToken cancellationToken)
         {
             User user = _mapper.Map<AuthRequest, User>(authRequest);

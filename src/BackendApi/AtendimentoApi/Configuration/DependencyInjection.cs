@@ -16,10 +16,12 @@ namespace AtendimentoApi.Configuration
             //Service
             services.AddScoped<IAtendimentoService, AtendimentoService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             //Repository
             services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             return services;
         }
