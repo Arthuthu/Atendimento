@@ -16,7 +16,7 @@ namespace AtendimentoBlazor.Services
             _logger = logger;
         }
 
-        public async Task<Atendimento?> GetById(Guid id)
+        public async Task<AtendimentoModel?> GetById(Guid id)
         {
             string buscarPorIdEndpoint = _config["APIUrl"] + _config["GetAtendimentoById"] + $"/{id}";
             var authResult = await _client.GetAsync(buscarPorIdEndpoint);
@@ -30,12 +30,12 @@ namespace AtendimentoBlazor.Services
                 return null;
             }
 
-            Atendimento? atendimento = JsonConvert.DeserializeObject<Atendimento>(authContent);
+            AtendimentoModel? atendimento = JsonConvert.DeserializeObject<AtendimentoModel>(authContent);
 
             return atendimento;
         }
 
-        public async Task<string?> Add(Atendimento atendimento)
+        public async Task<string?> Add(AtendimentoModel atendimento)
         {
             using FormUrlEncodedContent data = new
             ([

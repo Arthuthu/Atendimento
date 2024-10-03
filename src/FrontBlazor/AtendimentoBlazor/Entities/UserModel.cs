@@ -1,6 +1,6 @@
 ﻿namespace AtendimentoBlazor.Entities
 {
-    public sealed class User
+    public sealed class UserModel
     {
         public Guid Id { get; set; }
 
@@ -8,6 +8,6 @@
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
-        public List<Atendimento>? Atendimentos { get; set; }
+        public List<AtendimentoModel>? Atendimentos { get; set; }
     }
 }
