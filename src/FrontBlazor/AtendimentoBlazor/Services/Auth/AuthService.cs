@@ -44,18 +44,27 @@ namespace AtendimentoBlazor.Services.Auth
                 return null;
             }
 
-            var result = JsonSerializer.Deserialize<AuthenticatedUserModel>
-            (
-                authContent,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            );
+            AuthenticatedUserModel? result = null;
 
-            await _localStorage.SetItemAsync(authTokenStorageKey, result!.Access_Token);
+            try
+            {
+                result = JsonSerializer.Deserialize<AuthenticatedUserModel>
+                (
+                    authContent,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
 
-            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.Access_Token);
+                await _localStorage.SetItemAsync(authTokenStorageKey, result!.Access_Token);
 
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer",
-                result.Access_Token);
+                ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.Access_Token);
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer",
+                    result.Access_Token);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao deserializar o login do usuário", ex);
+            }
 
             return result;
         }

@@ -1,48 +1,5 @@
 ﻿@page "/"
-@using AtendimentoBlazor.Abstractions.Services
-@using AtendimentoBlazor.Entities
-@inject IUserService userService;
-@inject IAuthService authService;
-    
-<EditForm Model="AuthUser" OnValidSubmit="Login" class="form-div">
-    <div class="form-label">Entrar</div>
-    <div style="margin-bottom: 20px;">
-        <div style="font-size: 1.2rem;">
-            <label>Usuario</label>
-        </div>
-        <div>
-            <InputText @bind-Value="AuthUser.Username" class="form-input" />
-        </div>
-    </div>
-    <div>
-        <div style="font-size: 1.2rem;">
-            <label>Senha</label>
-        </div>
-        <div>
-            <InputText @bind-Value="AuthUser.Password" class="form-input" />
-        </div>
-    </div>
-    <div style="text-align: center; margin: 10px 0;">
-        <button class="primary-button">Entrar</button>
-    </div>
-    <div style="text-align: center; font-size: 1.2rem;">Não possui uma conta? Registre-se</div>
-    <div style="text-align: center; margin-top: 15px;">
-        <a class="primary-button" href="/registrar">Registrar-se</a>
-    </div>
-</EditForm>
 
-@if (Resultado is not null)
-{
-    <div>Ocorreu um erro ao entrar</div>
-    <div>@Resultado</div>
-}
-
-@code {
-    AuthModel AuthUser { get; set; } = new();
-    string? Resultado { get; set; }
-
-    private async Task Login()
-    {
-        string? token = await authService.Login(AuthUser);
-    }
-}
+<div style="text-align: center; margin-top: 20px;">
+    <a href="/login" class="primary-button">Login</a>
+</div>
