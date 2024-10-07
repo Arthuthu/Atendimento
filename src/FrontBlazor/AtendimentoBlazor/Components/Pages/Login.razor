@@ -1,6 +1,8 @@
 ﻿@page "/login"
 @inject IUserService userService;
 @inject IAuthService authService;
+@inject IAntiforgery Antiforgery
+@inject IHttpContextAccessor HttpContextAccessor
 @inject NavigationManager navManager;
 
 <EditForm Model="AuthUser" OnValidSubmit="AuthenticateUser" FormName="LoginForm" class="form-div">
@@ -41,15 +43,29 @@
 }
 
 @code {
+    [SupplyParameterFromForm]
     AuthModel AuthUser { get; set; } = new();
     AuthenticatedUserModel? AuthenticatedUser;
 
     private bool SendRequest = false;
+    private string RequestVerificationToken = string.Empty;
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var tokens = Antiforgery.GetAndStoreTokens(HttpContextAccessor.HttpContext);
+
+    //     if (tokens is not null && tokens.RequestToken is not null)
+    //     {
+    //         RequestVerificationToken = tokens.RequestToken;
+    //     }
+    // }
 
     private async Task AuthenticateUser()
     {
         AuthenticatedUser = await authService.Login(AuthUser);
         SendRequest = true;
+
+        string? token = authService.GetUserToken();
 
         if (AuthenticatedUser is not null)
         {

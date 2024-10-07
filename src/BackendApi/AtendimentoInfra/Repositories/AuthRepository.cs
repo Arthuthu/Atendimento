@@ -17,8 +17,12 @@ namespace AtendimentoInfra.Repositories
         public async Task<User?> Login(User user, CancellationToken cancellationToken)
         {
             User? requestedUser = await _context.Users
-                .SingleOrDefaultAsync(u => u.Username == user.Username && u.Password == user.Password,
-                    cancellationToken);
+                .SingleOrDefaultAsync
+                (
+                    u => u.Username.ToLower() == user.Username.ToLower() && 
+                    u.Password.ToLower() == user.Password.ToLower(),
+                    cancellationToken
+                );
 
             if (requestedUser is null)
                 return null;

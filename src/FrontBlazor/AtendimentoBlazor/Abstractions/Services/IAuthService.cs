@@ -5,6 +5,7 @@ namespace AtendimentoBlazor.Abstractions.Services
     public interface IAuthService
     {
         Task<AuthenticatedUserModel?> Login(AuthModel userForAuthentication);
-        Task Logout();
+        string? GetUserToken();
+        Task LogoutAsync();
     }
 }
