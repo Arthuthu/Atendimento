@@ -72,6 +72,7 @@ namespace AtendimentoBlazor.Services.Auth
             return authenticatedUser;
         }
 
+
         public string? GetUserToken()
         {
             HttpContext? httpContext = _httpContextAccessor.HttpContext;
@@ -87,6 +88,23 @@ namespace AtendimentoBlazor.Services.Auth
             }
 
             return null;
+        }
+
+        public void GetUserClaims()
+        {
+            HttpContext? httpContext = _httpContextAccessor.HttpContext;
+
+            if (httpContext is not null)
+            {
+                ClaimsPrincipal user = httpContext.User;
+
+                IEnumerable<Claim> userClaims = user.Claims;
+                foreach (Claim claim in userClaims)
+                {
+                    Console.WriteLine(claim.Value);
+                    Console.WriteLine(claim.Subject);
+                }
+            }
         }
 
         public async Task LogoutAsync()

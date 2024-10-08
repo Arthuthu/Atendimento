@@ -24,14 +24,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/login";
+        options.LogoutPath = "/logout";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
         options.SlidingExpiration = true;
     });
 
-//builder.Services.AddAntiforgery(options => { options.SuppressXFrameOptionsHeader = true; });
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddRazorComponents();
+
+builder.Services.AddAntiforgery(options =>
+{  
+    options.Cookie.Expiration = TimeSpan.Zero;
+});
 
 var app = builder.Build();
 
@@ -44,10 +49,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseAntiforgery();
+app.UseStaticFiles();
 
-app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+app.MapRazorComponents<App>().DisableAntiforgery().AddInteractiveServerRenderMode();
 
 app.Run();

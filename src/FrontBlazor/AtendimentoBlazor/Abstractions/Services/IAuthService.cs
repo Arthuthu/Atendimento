@@ -6,6 +6,7 @@ namespace AtendimentoBlazor.Abstractions.Services
     {
         Task<AuthenticatedUserModel?> Login(AuthModel userForAuthentication);
         string? GetUserToken();
+        void GetUserClaims();
         Task LogoutAsync();
     }
 }

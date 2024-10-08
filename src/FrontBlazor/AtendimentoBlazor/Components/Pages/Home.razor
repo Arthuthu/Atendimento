@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IAuthService authService;
 
 <div style="text-align: center; margin-top: 20px;">
     <a href="/login" class="primary-button">Login</a>
@@ -6,3 +7,25 @@
 <div style="text-align: center; margin-top: 30px;">
     <a href="/logout" class="primary-button">Logout</a>
 </div>
+
+<div style="margin-top: 40px; text-align: center;">
+    <button class="primary-button" @onclick="() => BuscarClaims()">Buscar</button>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        BuscarToken();
+        base.OnInitialized();
+    }
+
+    private void BuscarToken()
+    {
+        var token = authService.GetUserToken();
+    }
+
+    private void BuscarClaims()
+    {
+        authService.GetUserClaims();
+    }
+}
