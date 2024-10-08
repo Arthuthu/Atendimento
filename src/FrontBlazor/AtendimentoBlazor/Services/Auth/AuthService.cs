@@ -90,7 +90,7 @@ namespace AtendimentoBlazor.Services.Auth
             return null;
         }
 
-        public void GetUserClaims()
+        public IEnumerable<Claim>? GetUserClaims()
         {
             HttpContext? httpContext = _httpContextAccessor.HttpContext;
 
@@ -98,13 +98,10 @@ namespace AtendimentoBlazor.Services.Auth
             {
                 ClaimsPrincipal user = httpContext.User;
 
-                IEnumerable<Claim> userClaims = user.Claims;
-                foreach (Claim claim in userClaims)
-                {
-                    Console.WriteLine(claim.Value);
-                    Console.WriteLine(claim.Subject);
-                }
+                return user.Claims;
             }
+
+            return null;
         }
 
         public async Task LogoutAsync()
