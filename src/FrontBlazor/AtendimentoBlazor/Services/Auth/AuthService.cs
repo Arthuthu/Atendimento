@@ -3,7 +3,6 @@ using AtendimentoBlazor.Entities;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -14,17 +13,15 @@ namespace AtendimentoBlazor.Services.Auth
     {
         private readonly HttpClient _client;
         private readonly IConfiguration _config;
-        private readonly AuthenticationStateProvider _authStateProvider;
         private readonly ILocalStorageService _localStorage;
         private readonly ILogger<AuthService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string authTokenStorageKey;
 
-        public AuthService(HttpClient client, IConfiguration config, AuthenticationStateProvider authStateProvider,
-             ILocalStorageService localStorage, ILogger<AuthService> logger, IHttpContextAccessor httpContextAccessor)
+        public AuthService(HttpClient client, IConfiguration config, ILocalStorageService localStorage,
+            ILogger<AuthService> logger, IHttpContextAccessor httpContextAccessor)
         {
             _client = client;
-            _authStateProvider = authStateProvider;
             _localStorage = localStorage;
             _config = config;
             _logger = logger;
@@ -71,7 +68,6 @@ namespace AtendimentoBlazor.Services.Auth
 
             return authenticatedUser;
         }
-
 
         public string? GetUserToken()
         {

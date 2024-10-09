@@ -15,24 +15,20 @@
     </div>
 }
 
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1rem;">
+            @context.User.FindFirst(ClaimTypes.Name)?.Value
+        </div>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+"
 @code {
     private string? Username { get; set; }
 
     protected override void OnInitialized()
     {
-        BuscarClaims();
         base.OnInitialized();
-    }
-
-    private void BuscarToken()
-    {
-        var token = authService.GetUserToken();
-    }
-
-    private void BuscarClaims()
-    {
-        IEnumerable<Claim>? claims = authService.GetUserClaims();
-
-        Username = claims?.Where(x => x.Type == ClaimTypes.Name)?.FirstOrDefault()?.Value;
     }
 }
