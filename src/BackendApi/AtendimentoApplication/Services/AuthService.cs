@@ -1,6 +1,7 @@
 ﻿using AtendimentoApplication.Abstractions.Application;
 using AtendimentoApplication.Abstractions.Repository;
 using AtendimentoDomain.Entities;
+using AtendimentoDomain.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -39,8 +40,8 @@ namespace AtendimentoApplication.Services
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(TokenClaimTypes.ID.ToString(), user.Id.ToString()),
+                new Claim(TokenClaimTypes.Username.ToString(), user.Username)
             };
 
             JwtSecurityToken token = new(_config["Jwt:Issuer"],

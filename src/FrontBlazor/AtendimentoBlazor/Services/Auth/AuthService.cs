@@ -1,8 +1,10 @@
 ﻿using AtendimentoBlazor.Abstractions.Services;
 using AtendimentoBlazor.Entities;
+using AtendimentoBlazor.Enums;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -100,6 +102,20 @@ namespace AtendimentoBlazor.Services.Auth
             return null;
         }
 
+        public string? GetTokenClaimValue(TokenClaimTypes tokenClaim)
+        {
+            IEnumerable<Claim>? claims = GetUserClaims();
+
+            if (claims is not null)
+            {
+                var requestedClaim = claims.FirstOrDefault(x => x.Type == tokenClaim.ToString())?.Value;
+
+                return requestedClaim;
+            }
+
+            return null;
+        }
+
         public async Task LogoutAsync()
         {
             HttpContext? httpContext = _httpContextAccessor.HttpContext;
@@ -112,11 +128,7 @@ namespace AtendimentoBlazor.Services.Auth
 
         private async Task SaveUserData(AuthenticatedUserModel authenticatedUser)
         {
-            var claims = new List<Claim>
-            {
-                new(ClaimTypes.Name, authenticatedUser.Username),
-                new("AccessToken", authenticatedUser.Access_Token)
-            };
+            List<Claim> claims = StoreUserClaims(authenticatedUser);
 
             ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             ClaimsPrincipal claimsPrincipal = new(claimsIdentity);
@@ -134,6 +146,28 @@ namespace AtendimentoBlazor.Services.Auth
                 await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     claimsPrincipal, authProperties);
             }
+        }
+
+        private static List<Claim> StoreUserClaims(AuthenticatedUserModel authenticatedUser)
+        {
+            JwtSecurityTokenHandler handler = new();
+            JwtSecurityToken jwtToken = handler.ReadJwtToken(authenticatedUser.AccessToken);
+
+            string? usernameClaim = jwtToken.Claims
+                .FirstOrDefault(x => x.Type == TokenClaimTypes.Username.ToString())?.Value;
+
+            string? idClaim = jwtToken.Claims
+                .FirstOrDefault(x => x.Type == TokenClaimTypes.ID.ToString())?.Value;
+
+            string? accessTokenClaim = authenticatedUser.AccessToken;
+
+            var claims = new List<Claim>
+            {
+                new(TokenClaimTypes.Username.ToString(), usernameClaim ?? string.Empty),
+                new(TokenClaimTypes.ID.ToString(), idClaim ?? string.Empty),
+                new(TokenClaimTypes.AccessToken.ToString(), accessTokenClaim ?? string.Empty)
+            };
+            return claims;
         }
     }
 }

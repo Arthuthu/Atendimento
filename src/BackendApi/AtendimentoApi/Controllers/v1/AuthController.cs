@@ -31,7 +31,7 @@ namespace AtendimentoApi.Controllers.v1
             if (loginResult is null)
                 return NotFound("Usuario ou senha incorretos");
 
-            var output = new { Access_Token = loginResult, user.Username };
+            var output = new { AccessToken = loginResult };
 
             return Ok(output);
         }

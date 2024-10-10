@@ -8,26 +8,23 @@
     <a href="/logout" class="primary-button">Logout</a>
 </div>
 
-@if (Username != string.Empty)
-{
-    <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1rem;">
-        Olá @Username
-    </div>
-}
-
-
 <AuthorizeView>
     <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1rem;">
-        @context.User.FindFirst(ClaimTypes.Name)?.Value
+       Olá @context.User.FindFirst(ClaimTypes.Name)?.Value
     </div>
 </AuthorizeView>
 
-"
 @code {
     private string? Username { get; set; }
+    private string? ID { get; set; }
+    private string? AccessToken { get; set; }
 
     protected override void OnInitialized()
     {
+        Username = authService.GetTokenClaimValue(TokenClaimTypes.Username);
+        ID = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+        AccessToken = authService.GetTokenClaimValue(TokenClaimTypes.AccessToken);
+
         base.OnInitialized();
     }
 }
