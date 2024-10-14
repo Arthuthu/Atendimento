@@ -1,30 +1,26 @@
 ﻿@page "/"
 @inject IAuthService authService;
 
-<div style="text-align: center; margin-top: 20px;">
-    <a href="/login" class="primary-button">Login</a>
-</div>
-<div style="text-align: center; margin-top: 30px;">
-    <a href="/logout" class="primary-button">Logout</a>
-</div>
-
 <AuthorizeView>
-    <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1rem;">
-       Olá @context.User.FindFirst(ClaimTypes.Name)?.Value
-    </div>
+    <NotAuthorized>
+        <div style="text-align: end; margin: 20px;">
+            <a href="/login" class="primary-button">Entrar</a>
+        </div>
+    </NotAuthorized>
+    <Authorized>
+        <div style="text-align: end; margin: 20px;">
+            <a href="/logout" class="primary-button">Sair</a>
+        </div>
+        <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1.2rem;">
+            Olá @context.User.FindFirst(TokenClaimTypes.Username.ToString())?.Value
+        </div>
+    </Authorized>
 </AuthorizeView>
 
-@code {
-    private string? Username { get; set; }
-    private string? ID { get; set; }
-    private string? AccessToken { get; set; }
 
+@code {
     protected override void OnInitialized()
     {
-        Username = authService.GetTokenClaimValue(TokenClaimTypes.Username);
-        ID = authService.GetTokenClaimValue(TokenClaimTypes.ID);
-        AccessToken = authService.GetTokenClaimValue(TokenClaimTypes.AccessToken);
-
         base.OnInitialized();
     }
 }
