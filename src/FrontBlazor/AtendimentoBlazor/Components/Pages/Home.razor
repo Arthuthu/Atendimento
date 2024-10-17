@@ -14,6 +14,9 @@
         <div style="text-align: center; margin-top: 30px; color: #FFF; font-size: 1.2rem;">
             Olá @context.User.FindFirst(TokenClaimTypes.Username.ToString())?.Value
         </div>
+        <div style="text-align: center; margin: 40px;">
+            <a href="/atendimento/criar" class="primary-button">Criar atendimento</a>
+        </div>
     </Authorized>
 </AuthorizeView>
 
