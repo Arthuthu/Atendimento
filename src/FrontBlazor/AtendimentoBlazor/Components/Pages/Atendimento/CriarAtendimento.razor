@@ -1,7 +1,45 @@
 ﻿@page "/atendimento/criar"
 
-<div>Criar atendimento</div>
+<AuthorizeView>
+    <Authorized>
+        <EditForm Model="Atendimento" Context="FormContext" OnValidSubmit="Criar" FormName="AtendimentoForm" class="form-div">
+            <div class="form-label">Criar atendimento</div>
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 1.2rem;">
+                    <label>Numero</label>
+                </div>
+                <div>
+                    <InputText @bind-Value="Atendimento.Numero" class="form-input" />
+                </div>
+            </div>
+            <div>
+                <div style="font-size: 1.2rem;">
+                    <label>Versão</label>
+                </div>
+                <div>
+                    <InputText @bind-Value="Atendimento.Versao" class="form-input" />
+                </div>
+            </div>
+            <div>
+                <div style="font-size: 1.2rem;">
+                    <label>Descrição</label>
+                </div>
+                <div>
+                    <InputText @bind-Value="Atendimento.Descricao" class="form-input" />
+                </div>
+            </div>
+            <div style="text-align: center; margin: 10px 0;">
+                <button class="primary-button">Salvar</button>
+            </div>
+        </EditForm>
+    </Authorized>
+</AuthorizeView>
 
 @code {
+    private AtendimentoModel Atendimento { get; set; } = new();
 
+    private void Criar()
+    {
+        
+    }
 }

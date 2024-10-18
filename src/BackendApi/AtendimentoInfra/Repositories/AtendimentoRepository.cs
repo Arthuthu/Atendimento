@@ -42,7 +42,7 @@ namespace AtendimentoInfra.Repositories
                 return null;
             }
 
-            requestedAtendimento.Codigo = atendimento.Codigo;
+            requestedAtendimento.Numero = atendimento.Numero;
             requestedAtendimento.Versao = atendimento.Versao;
             requestedAtendimento.Descricao = atendimento.Descricao;
 

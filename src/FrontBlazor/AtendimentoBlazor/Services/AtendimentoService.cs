@@ -39,7 +39,7 @@ namespace AtendimentoBlazor.Services
         {
             using FormUrlEncodedContent data = new
             ([
-                new KeyValuePair<string, string>("Codigo", atendimento.Codigo),
+                new KeyValuePair<string, string>("Codigo", atendimento.Numero),
                 new KeyValuePair<string, string>("Versao", atendimento.Versao),
                 new KeyValuePair<string, string>("Descricao", atendimento.Descricao)
             ]);

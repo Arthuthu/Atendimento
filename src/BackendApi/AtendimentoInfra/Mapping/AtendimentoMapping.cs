@@ -15,7 +15,7 @@ namespace AtendimentoInfra.Mapping
             base.Configure(builder);
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Codigo).HasMaxLength(10);
+            builder.Property(x => x.Numero).HasMaxLength(10);
             builder.Property(x => x.Versao).HasMaxLength(50);
             builder.Property(x => x.Descricao).HasMaxLength(2000);
             builder.Property(x => x.UserId);
@@ -24,7 +24,7 @@ namespace AtendimentoInfra.Mapping
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasIndex(x => x.Codigo);
+            builder.HasIndex(x => x.Numero);
         }
     }
 }
