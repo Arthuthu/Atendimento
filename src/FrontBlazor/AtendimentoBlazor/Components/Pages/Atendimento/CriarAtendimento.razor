@@ -1,4 +1,7 @@
 ﻿@page "/atendimento/criar"
+@inject IAtendimentoService atendimentoService
+@inject IAuthService authService
+@inject NavigationManager navManager
 
 <AuthorizeView>
     <Authorized>
@@ -36,10 +39,23 @@
 </AuthorizeView>
 
 @code {
+    [SupplyParameterFromForm]
     private AtendimentoModel Atendimento { get; set; } = new();
 
-    private void Criar()
+    private async Task Criar()
     {
-        
+        string? userId = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            Atendimento.UserId = Guid.Parse(userId!);
+        }
+
+        string? resultado = await atendimentoService.Add(Atendimento);
+
+        if (resultado is null)
+        {
+            navManager.NavigateTo("/atendimentos"); 
+        }
     }
 }

@@ -14,6 +14,7 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAtendimentoService, AtendimentoService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 //builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 

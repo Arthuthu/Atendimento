@@ -1,9 +1,11 @@
-﻿using AtendimentoBlazor.Entities;
-using Newtonsoft.Json;
+﻿using AtendimentoBlazor.Abstractions.Services;
+using AtendimentoBlazor.Entities;
+using System.Text;
+using System.Text.Json;
 
 namespace AtendimentoBlazor.Services
 {
-    public sealed class AtendimentoService
+    public sealed class AtendimentoService : IAtendimentoService
     {
         private readonly HttpClient _client;
         private readonly IConfiguration _config;
@@ -30,19 +32,17 @@ namespace AtendimentoBlazor.Services
                 return null;
             }
 
-            AtendimentoModel? atendimento = JsonConvert.DeserializeObject<AtendimentoModel>(authContent);
+            AtendimentoModel? atendimento = JsonSerializer.Deserialize<AtendimentoModel>(authContent);
 
             return atendimento;
         }
 
         public async Task<string?> Add(AtendimentoModel atendimento)
         {
-            using FormUrlEncodedContent data = new
-            ([
-                new KeyValuePair<string, string>("Codigo", atendimento.Numero),
-                new KeyValuePair<string, string>("Versao", atendimento.Versao),
-                new KeyValuePair<string, string>("Descricao", atendimento.Descricao)
-            ]);
+            string jsonContent = JsonSerializer.Serialize(atendimento);
+
+            using var data = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
 
             string addEndpoint = _config["APIUrl"] + _config["AddAtendimento"];
             HttpResponseMessage authResult = await _client.PostAsync(addEndpoint, data);
