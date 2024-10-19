@@ -135,6 +135,8 @@ text-center {
 
 .atendimento-column-cell {
     background-color: transparent;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .atendimento-row-cell {
@@ -146,4 +148,23 @@ text-center {
     background-color: var(--cinza);
     transition: 500ms;
     cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #3f3d3d;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7e7e7e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cinza);
 }
