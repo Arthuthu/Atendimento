@@ -1,6 +1,48 @@
 ﻿@page "/atendimentos"
 @inject IAtendimentoService atendimentoService
+@inject IAuthService authService
+
+<AuthorizeView>
+    <Authorized>
+        @if (AtendimentosList is not null && AtendimentosList.Count > 0)
+        {
+            <div class="atendimentos-div">
+                <div class="atendimentos-column-div">
+                    <div class="atendimento-column-header">Numero</div>
+                    <div class="atendimento-column-header">Versão</div>
+                    <div class="atendimento-column-header">Descrição</div>
+                </div>
+                <div style="display: flex; justify-content: center; flex-direction: column;">
+                    @foreach (var atendimento in AtendimentosList)
+                    {
+                        <div class="atendimento-row-cell">
+                            <div class="atendimento-column-cell">@atendimento.Numero</div>
+                            <div class="atendimento-column-cell">@atendimento.Versao</div>
+                            <div class="atendimento-column-cell">@atendimento.Descricao</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </Authorized>
+</AuthorizeView>
 
 @code {
+    List<AtendimentoModel>? AtendimentosList { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUserAtendimentos();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetUserAtendimentos()
+    {
+        string? userId = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            AtendimentosList = await atendimentoService.GetAtendimentosByUserId(Guid.Parse(userId));
+        }
+    }
 }

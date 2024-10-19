@@ -20,8 +20,8 @@ namespace AtendimentoBlazor.Services
 
         public async Task<AtendimentoModel?> GetById(Guid id)
         {
-            string buscarPorIdEndpoint = _config["APIUrl"] + _config["GetAtendimentoById"] + $"/{id}";
-            var authResult = await _client.GetAsync(buscarPorIdEndpoint);
+            string endpoint = _config["APIUrl"] + _config["GetAtendimentoById"] + $"/{id}";
+            var authResult = await _client.GetAsync(endpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
             if (authResult.IsSuccessStatusCode is false)
@@ -35,6 +35,30 @@ namespace AtendimentoBlazor.Services
             AtendimentoModel? atendimento = JsonSerializer.Deserialize<AtendimentoModel>(authContent);
 
             return atendimento;
+        }
+
+        public async Task<List<AtendimentoModel>?> GetAtendimentosByUserId(Guid userId)
+        {
+            string endpoint = _config["APIUrl"] + _config["GetAtendimentoByUserId"] + $"/{userId}";
+            var authResult = await _client.GetAsync(endpoint);
+            var authContent = await authResult.Content.ReadAsStringAsync();
+
+            if (authResult.IsSuccessStatusCode is false)
+            {
+                _logger.LogError("Ocorreu um erro durante o carregamento do atendimento por user id: {authContent}",
+                    authContent);
+
+                return null;
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            List<AtendimentoModel>? atendimentos = JsonSerializer.Deserialize<List<AtendimentoModel>?>(authContent, options);
+
+            return atendimentos;
         }
 
         public async Task<string?> Add(AtendimentoModel atendimento)
@@ -60,8 +84,8 @@ namespace AtendimentoBlazor.Services
 
         public async Task<string?> Delete(Guid id)
         {
-            string deleteEndpoint = _config["APIUrl"] + _config["DeletarAtendimento"] + $"/{id}";
-            var authResult = await _client.DeleteAsync(deleteEndpoint);
+            string endpoint = _config["APIUrl"] + _config["DeletarAtendimento"] + $"/{id}";
+            var authResult = await _client.DeleteAsync(endpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
             if (authResult.IsSuccessStatusCode is false)
