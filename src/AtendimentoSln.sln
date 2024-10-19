@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtendimentoBlazor", "FrontB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtendimentoRepository.Tests.XUnit", "..\tests\AtendimentoRepository.Tests.XUnit\AtendimentoRepository.Tests.XUnit.csproj", "{BDF3020C-9457-4CDA-962F-B3C6B8827622}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtendimentoService.Tests.XUnit", "..\tests\AtendimentoService.Tests.XUnit\AtendimentoService.Tests.XUnit.csproj", "{CDC075D0-0D3F-47BE-B0C3-721928699CFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{BDF3020C-9457-4CDA-962F-B3C6B8827622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF3020C-9457-4CDA-962F-B3C6B8827622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF3020C-9457-4CDA-962F-B3C6B8827622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC075D0-0D3F-47BE-B0C3-721928699CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC075D0-0D3F-47BE-B0C3-721928699CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC075D0-0D3F-47BE-B0C3-721928699CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC075D0-0D3F-47BE-B0C3-721928699CFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{717235BA-C4C7-4BD8-9563-2E96FEC85B0D} = {365C0818-EBF5-43B0-A9B9-A1A60F138100}
 		{41795AE9-AB82-4717-B453-35D2862007EE} = {8697DCB1-50DD-4E67-8D22-B3ADB4730864}
 		{BDF3020C-9457-4CDA-962F-B3C6B8827622} = {5DE8F45E-4251-489F-B4DE-21EBAC348B0C}
+		{CDC075D0-0D3F-47BE-B0C3-721928699CFF} = {5DE8F45E-4251-489F-B4DE-21EBAC348B0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9C0CCB7-C067-4A0A-BCFD-1BEC8703D68E}
