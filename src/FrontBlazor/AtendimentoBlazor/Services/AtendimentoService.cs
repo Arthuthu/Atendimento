@@ -84,7 +84,7 @@ namespace AtendimentoBlazor.Services
 
         public async Task<string?> Delete(Guid id)
         {
-            string endpoint = _config["APIUrl"] + _config["DeletarAtendimento"] + $"/{id}";
+            string endpoint = _config["APIUrl"] + _config["DeleteAtendimento"] + $"/{id}";
             var authResult = await _client.DeleteAsync(endpoint);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
