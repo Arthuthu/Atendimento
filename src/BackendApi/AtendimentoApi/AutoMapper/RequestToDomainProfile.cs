@@ -11,6 +11,7 @@ namespace AtendimentoApi.AutoMapper
             CreateMap<AtendimentoRequest, Atendimento>(MemberList.Destination);
             CreateMap<UserRequest, User>(MemberList.Destination);
             CreateMap<AuthRequest, Auth>(MemberList.Destination);
+            CreateMap<GroupRequest, Group>(MemberList.Destination);
 
             CreateMap<AuthRequest, User>(MemberList.Destination);
         }

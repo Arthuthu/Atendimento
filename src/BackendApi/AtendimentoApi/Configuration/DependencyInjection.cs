@@ -17,11 +17,13 @@ namespace AtendimentoApi.Configuration
             services.AddScoped<IAtendimentoService, AtendimentoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IGroupService, GroupService>();
 
             //Repository
             services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
 
             return services;
         }

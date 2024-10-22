@@ -7,5 +7,6 @@
         public string Email { get; set; } = string.Empty;
 
         public List<AtendimentoRequest>? Atendimentos { get; set; }
+        public GroupRequest? Group { get; set; }
     }
 }
