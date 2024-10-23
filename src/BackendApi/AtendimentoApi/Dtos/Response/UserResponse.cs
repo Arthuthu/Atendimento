@@ -8,5 +8,6 @@
         public string Email { get; set; } = string.Empty;
 
         public List<AtendimentoResponse>? Atendimentos { get; set; }
+        public List<GroupResponse>? Groups { get; set; }
     }
 }

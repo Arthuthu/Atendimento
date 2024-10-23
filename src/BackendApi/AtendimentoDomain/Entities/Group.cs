@@ -5,7 +5,7 @@ namespace AtendimentoDomain.Entities
     public sealed class Group : Entity
     {
         public string Name { get; set; } = string.Empty;
-
-        public List<User>? Users { get; set; }
+        public Guid? UserOwnerId { get; set; }
+        public List<Guid>? UsersId { get; set; }
     }
 }

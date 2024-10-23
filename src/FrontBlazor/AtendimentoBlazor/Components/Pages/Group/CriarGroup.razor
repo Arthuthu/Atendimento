@@ -1,0 +1,52 @@
+﻿@page "/group/criar"
+
+@inject IGroupService groupService
+@inject IAuthService authService
+@inject IUserService userService
+@inject NavigationManager navManager
+@rendermode InteractiveServer
+
+<EditForm Model="@Group" FormName="groupFormName" OnValidSubmit="Criar" class="form-div">
+    <div class="form-label">Criar grupo</div>
+    <div>
+        <div style="font-size: 1.2rem;">
+            <label>Nome do grupo</label>
+        </div>
+        <div>
+            <InputText @bind-Value="Group.Name" class="form-input" />
+        </div>
+    </div>
+    <div style="text-align: center; margin: 10px 0;">
+        <button class="primary-button">Salvar</button>
+    </div>
+    <div class="segoe-ui-padrao" style="text-align: center; margin-top: 30px;">
+        @MensagemErro
+    </div>
+</EditForm>
+
+@code {
+    private GroupModel Group { get; set; } = new();
+    private string MensagemErro { get; set; } = string.Empty;
+
+    private async Task Criar()
+    {
+        if (!string.IsNullOrEmpty(Group.Name))
+        {
+            string? userId = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+
+            if(!string.IsNullOrEmpty(userId))
+            {
+                Group.UsersId ??= [];
+                Group.UsersId.Add(new Guid(userId));
+                Group.UserOwnerId = new Guid(userId);
+
+                await groupService.Add(Group);
+                navManager.NavigateTo("/");
+            }
+        }
+        else
+        {
+            MensagemErro = "Campo nome não pode ficar vazio";
+        }
+    }
+}

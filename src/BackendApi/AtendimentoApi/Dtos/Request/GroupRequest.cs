@@ -3,6 +3,7 @@
     public sealed class GroupRequest
     {
         public string Name { get; set; } = string.Empty;
-        public List<UserRequest>? Users { get; set; }
+        public Guid? UserOwnerId { get; set; }
+        public List<Guid>? UsersId { get; set; }
     }
 }

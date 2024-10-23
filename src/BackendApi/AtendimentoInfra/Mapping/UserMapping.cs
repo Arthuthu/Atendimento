@@ -9,7 +9,6 @@ namespace AtendimentoInfra.Mapping
         public UserMapping() : base("Users")
         {
         }
-
         public override void Configure(EntityTypeBuilder<User> builder)
         {
             base.Configure(builder);
@@ -23,7 +22,8 @@ namespace AtendimentoInfra.Mapping
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasIndex(x => x.Username);
+            builder.HasIndex(x => x.Username).IsUnique();
+            builder.HasIndex(x => x.Email).IsUnique();
         }
     }
 }

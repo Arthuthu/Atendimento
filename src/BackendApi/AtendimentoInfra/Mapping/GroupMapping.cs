@@ -16,10 +16,7 @@ namespace AtendimentoInfra.Mapping
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(50);
-            builder.HasMany(x => x.Users)
-                .WithOne(x => x.Group)
-                .HasForeignKey(x => x.GroupId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(x => x.UserOwnerId);
 
             builder.HasIndex(x => x.Id);
         }
