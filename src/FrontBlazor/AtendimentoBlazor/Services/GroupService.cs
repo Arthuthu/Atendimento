@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text;
 using AtendimentoBlazor.Abstractions.Services;
+using System.Collections.Generic;
 
 namespace AtendimentoBlazor.Services
 {
@@ -36,6 +37,25 @@ namespace AtendimentoBlazor.Services
 
             return result;
         }
+        public async Task<List<GroupModel>?> GetGroupsByUserId(Guid id)
+        {
+            string endpoint = _config["APIUrl"] + _config["GetGroupsByUserId"] + $"/{id}";
+            var authResult = await _client.GetAsync(endpoint);
+            var authContent = await authResult.Content.ReadAsStringAsync();
+
+            if (authResult.IsSuccessStatusCode is false)
+            {
+                _logger.LogError("Ocorreu um erro durante o carregamento dos group por user id: {authContent}",
+                    authContent);
+
+                return null;
+            }
+
+            List<GroupModel>? result = JsonSerializer.Deserialize<List<GroupModel>?>(authContent);
+
+            return result;
+        }
+
         public async Task<string?> Add(GroupModel group)
         {
             string jsonContent = JsonSerializer.Serialize(group);

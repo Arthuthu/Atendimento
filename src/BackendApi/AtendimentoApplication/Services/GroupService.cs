@@ -19,6 +19,11 @@ namespace AtendimentoApplication.Services
             return await _repository.GetGroupById(groupId, ct);
         }
 
+        public async Task<List<Group>?> GetGroupsByUserId(Guid id, CancellationToken ct)
+        {
+            return await _repository.GetGroupsByUserId(id, ct);
+        }
+
         public async Task<string?> Add(Group user, CancellationToken ct)
         {
             try

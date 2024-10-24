@@ -20,6 +20,14 @@ namespace AtendimentoInfra.Repositories
             return group;
         }
 
+        public async Task<List<Group>?> GetGroupsByUserId(Guid id, CancellationToken ct)
+        {
+            List<Group>? groups = await _context.Group.Where(x => x.UsersId != null &&
+            x.UsersId.Contains(id)).ToListAsync();
+
+            return groups;
+        }
+
         public async Task<Group?> Add(Group group, CancellationToken ct)
         {
             await _context.AddAsync(group, ct);
@@ -27,7 +35,6 @@ namespace AtendimentoInfra.Repositories
 
             return null;
         }
-
         public async Task<Group?> Update(Group group, CancellationToken ct)
         {
             Group? requestedGroup = await _context.Group.SingleOrDefaultAsync(x => x.Id == group.Id);

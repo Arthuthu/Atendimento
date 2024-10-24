@@ -94,6 +94,30 @@ namespace AtendimentoApi.Controllers.v1
             }
         }
 
+        [HttpGet]
+        [Route("v1/group/getgroupsbyuserid/{id}")]
+        [ProducesResponseType(typeof(GroupResponse), 200),
+        ProducesResponseType(404), ProducesResponseType(500)]
+        public async Task<IActionResult> GetGroupsByUserId(Guid id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                List<Group>? group = await _service.GetGroupsByUserId(id, cancellationToken);
+
+                if (group is null)
+                {
+                    return NotFound("Groups not found");
+                }
+
+                return Ok(_mapper.Map<List<Group>?>(group));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"An error has occurred while searching for the groups: {ex.Message}");
+            }
+        }
+
         [HttpDelete]
         [Route("v1/group/delete/{id}")]
         [ProducesResponseType(200),

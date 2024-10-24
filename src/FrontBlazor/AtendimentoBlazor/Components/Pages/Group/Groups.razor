@@ -1,7 +1,31 @@
 ﻿@page "/groups"
+@inject IGroupService groupService
+@inject IAuthService authService
 
-<div>groups</div>
+@if (GroupsList is not null && GroupsList.Count > 0)
+{
+    @foreach (var group in GroupsList)
+    {
+        <div class="segoe-ui-padrao">@group.Name</div>
+    }
+}
 
 @code {
+    List<GroupModel>? GroupsList { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUserAtendimentos();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetUserAtendimentos()
+    {
+        string? userId = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            GroupsList = await groupService.GetGroupsByUserId(Guid.Parse(userId));
+        }
+    }
 }
