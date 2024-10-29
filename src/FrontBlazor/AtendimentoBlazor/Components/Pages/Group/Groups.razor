@@ -2,13 +2,38 @@
 @inject IGroupService groupService
 @inject IAuthService authService
 
-@if (GroupsList is not null && GroupsList.Count > 0)
-{
-    @foreach (var group in GroupsList)
-    {
-        <div class="segoe-ui-padrao">@group.Name</div>
-    }
-}
+<AuthorizeView>
+    <Authorized>
+        @if (GroupsList is not null && GroupsList.Count > 0)
+        {
+            <div class="atendimentos-div">
+                <div class="atendimentos-column-div">
+                    <div class="atendimento-column-header">Grupo</div>
+                </div>
+                <div style="display: flex; justify-content: center; flex-direction: column;">
+                    @foreach (var group in GroupsList)
+                    {
+                        <div class="atendimento-row-cell">
+                            <div class="atendimento-column-cell">@group.Name</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="segoe-ui-padrao" style="margin: 20px 0; text-align: center; font-size: 1.5rem;">
+                Não foi encontrado nenhum grupo
+            </div>
+        }
+        <div style="text-align: center; margin: 40px;">
+            <a href="/group/criar" class="primary-button">Criar Grupo</a>
+        </div>
+        <div style="text-align: center; margin: 40px;">
+            <a href="/" class="primary-button">Voltar</a>
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 @code {
     List<GroupModel>? GroupsList { get; set; }

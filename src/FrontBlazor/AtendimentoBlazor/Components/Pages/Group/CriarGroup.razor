@@ -22,6 +22,9 @@
     <div class="segoe-ui-padrao" style="text-align: center; margin-top: 30px;">
         @MensagemErro
     </div>
+    <div style="text-align: center; margin: 40px;">
+        <a href="/groups" class="primary-button">Voltar</a>
+    </div>
 </EditForm>
 
 @code {
@@ -41,7 +44,7 @@
                 Group.UserOwnerId = new Guid(userId);
 
                 await groupService.Add(Group);
-                navManager.NavigateTo("/");
+                navManager.NavigateTo("/groups");
             }
         }
         else

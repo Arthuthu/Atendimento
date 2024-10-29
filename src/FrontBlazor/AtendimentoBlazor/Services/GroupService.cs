@@ -51,7 +51,13 @@ namespace AtendimentoBlazor.Services
                 return null;
             }
 
-            List<GroupModel>? result = JsonSerializer.Deserialize<List<GroupModel>?>(authContent);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            List<GroupModel>? result = JsonSerializer.Deserialize<List<GroupModel>>(authContent, options);
+
 
             return result;
         }
