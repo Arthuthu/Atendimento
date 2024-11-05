@@ -137,6 +137,8 @@ text-center {
     background-color: transparent;
     white-space: nowrap;
     overflow-x: auto;
+    color: #FFF;
+    text-decoration: none;
 }
 
 .atendimento-row-cell {

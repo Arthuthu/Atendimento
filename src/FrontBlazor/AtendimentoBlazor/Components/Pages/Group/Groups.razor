@@ -14,7 +14,7 @@
                     @foreach (var group in GroupsList)
                     {
                         <div class="atendimento-row-cell">
-                            <div class="atendimento-column-cell">@group.Name</div>
+                            <a class="atendimento-column-cell" href="/group/@group.Id">@group.Name</a>
                         </div>
                     }
                 </div>

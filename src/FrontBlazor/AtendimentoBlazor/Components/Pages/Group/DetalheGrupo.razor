@@ -1,0 +1,31 @@
+﻿@page "/group/{GroupId}"
+
+@inject IGroupService groupService
+
+<AuthorizeView>
+    <Authorized>
+        @if (Group is not null)
+        {
+            <div style="color: #FFF; text-align: center;">
+                @Group.Name
+            </div>
+        }
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    [Parameter]
+    public string? GroupId { get; set; }
+
+    public GroupModel? Group { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(GroupId))
+        {
+            Group = await groupService.GetById(new Guid(GroupId));
+        }
+
+        await base.OnInitializedAsync();
+    }
+}
