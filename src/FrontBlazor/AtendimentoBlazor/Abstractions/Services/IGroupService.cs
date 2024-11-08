@@ -8,5 +8,6 @@ namespace AtendimentoBlazor.Abstractions.Services
         Task<List<GroupModel>?> GetGroupsByUserId(Guid id);
         Task<string?> Delete(Guid id);
         Task<GroupModel?> GetById(Guid id);
+        Task<List<GroupModel>?> GetAll();
     }
 }

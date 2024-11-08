@@ -19,8 +19,31 @@ namespace AtendimentoApi.Controllers.v1
             _mapper = mapper;
         }
 
+        [HttpGet]
+        [Route("v1/group/getall")]
+        [ProducesResponseType(typeof(string), 400),
+         ProducesResponseType(500)]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                List<Group>? groups = await _service.GetAll();
 
-        [HttpPost]
+                if (groups is null || groups.Count == 0)
+                {
+                    return NotFound("No groups were found");
+                }
+
+                return Ok(groups);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"An error ocurred while getting all groups {ex.Message}");
+            }
+        }
+
+            [HttpPost]
         [Route("v1/group/add")]
         [ProducesResponseType(typeof(string), 400),
          ProducesResponseType(500)]

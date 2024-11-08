@@ -14,6 +14,12 @@ namespace AtendimentoInfra.Repositories
             _context = context;
         }
 
+        public async Task<List<Group>?> GetAll()
+        {
+            List<Group>? groups = await _context.Group.ToListAsync();
+            return groups;
+        }
+
         public async Task<Group?> GetGroupById(Guid id, CancellationToken ct)
         {
             Group? group = await _context.Group.FindAsync(id);
@@ -35,6 +41,7 @@ namespace AtendimentoInfra.Repositories
 
             return null;
         }
+
         public async Task<Group?> Update(Group group, CancellationToken ct)
         {
             Group? requestedGroup = await _context.Group.SingleOrDefaultAsync(x => x.Id == group.Id);

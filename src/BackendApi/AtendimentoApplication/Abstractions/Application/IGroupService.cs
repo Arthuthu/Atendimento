@@ -9,5 +9,6 @@ namespace AtendimentoApplication.Abstractions.Application
         Task<List<Group>?> GetGroupsByUserId(Guid id, CancellationToken ct);
         Task<Group?> GetGroupById(Guid groupId, CancellationToken ct);
         Task<Group?> Update(Group group, CancellationToken ct);
+        Task<List<Group>?> GetAll();
     }
 }

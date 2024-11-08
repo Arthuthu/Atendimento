@@ -13,6 +13,10 @@ namespace AtendimentoApplication.Services
             _repository = repository;
         }
 
+        public async Task<List<Group>?> GetAll()
+        {
+            return await _repository.GetAll();
+        }
 
         public async Task<Group?> GetGroupById(Guid groupId, CancellationToken ct)
         {

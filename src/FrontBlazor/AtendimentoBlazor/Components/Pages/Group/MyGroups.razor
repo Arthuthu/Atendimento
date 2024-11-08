@@ -1,5 +1,6 @@
-﻿@page "/groups"
+﻿@page "/mygroups"
 @inject IGroupService groupService
+@inject IAuthService authService
 
 <AuthorizeView>
     <Authorized>
@@ -39,12 +40,17 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await GetAllGroups();
+        await GetUserGroups();
         await base.OnInitializedAsync();
     }
 
-    private async Task GetAllGroups()
+    private async Task GetUserGroups()
     {
-        GroupsList = await groupService.GetAll();
+        string? userId = authService.GetTokenClaimValue(TokenClaimTypes.ID);
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            GroupsList = await groupService.GetGroupsByUserId(Guid.Parse(userId));
+        }
     }
 }

@@ -42,6 +42,30 @@ namespace AtendimentoBlazor.Services
 
             return result;
         }
+        public async Task<List<GroupModel>?> GetAll()
+        {
+            string endpoint = _config["APIUrl"] + _config["GetAllGroups"];
+            var authResult = await _client.GetAsync(endpoint);
+            var authContent = await authResult.Content.ReadAsStringAsync();
+
+            if (authResult.IsSuccessStatusCode is false)
+            {
+                _logger.LogError("Ocorreu um erro durante o carregamento de todos os grupos: {authContent}",
+                    authContent);
+
+                return null;
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            List<GroupModel>? result = JsonSerializer.Deserialize<List<GroupModel>?>(authContent, options);
+
+            return result;
+        }
+
         public async Task<List<GroupModel>?> GetGroupsByUserId(Guid id)
         {
             string endpoint = _config["APIUrl"] + _config["GetGroupsByUserId"] + $"/{id}";
