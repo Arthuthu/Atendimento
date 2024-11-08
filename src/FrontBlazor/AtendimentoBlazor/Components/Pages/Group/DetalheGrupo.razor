@@ -1,14 +1,24 @@
 ﻿@page "/group/{GroupId}"
 
 @inject IGroupService groupService
+@inject IUserService userService
 
 <AuthorizeView>
     <Authorized>
         @if (Group is not null)
         {
-            <div style="color: #FFF; text-align: center;">
+            <div class="segoe-ui-padrao"  style="color: #FFF; text-align: center;">
                 @Group.Name
             </div>
+            @if (GroupUsers is not null && GroupUsers.Count > 0)
+            {
+                @foreach (var user in GroupUsers)
+                {
+                    <div class="segoe-ui-padrao" style="text-align: center; color: #FFF; margin-top: 20px;">
+                        @user.Username
+                    </div>
+                }
+            }
         }
     </Authorized>
 </AuthorizeView>
@@ -18,12 +28,29 @@
     public string? GroupId { get; set; }
 
     public GroupModel? Group { get; set; }
+    public List<UserModel>? GroupUsers { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         if (!string.IsNullOrEmpty(GroupId))
         {
             Group = await groupService.GetById(new Guid(GroupId));
+        }
+
+        if (Group is not null && Group.UsersId is not null && Group.UsersId.Count > 0)
+        {
+            GroupUsers ??= [];
+
+            foreach (Guid userId in Group.UsersId)
+            {
+                UserModel? newUser = new();
+                newUser = await userService.GetById(userId);
+
+                if (newUser is not null)
+                {
+                    GroupUsers.Add(newUser);
+                }
+            }
         }
 
         await base.OnInitializedAsync();
