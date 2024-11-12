@@ -94,7 +94,7 @@ text-center {
 }
 
 /* Atendimento */
-.atendimentos-div {
+.page-div {
     font-family: 'Segoe UI';
     font-size: 1.4rem;
     font-weight: 600;
@@ -103,13 +103,13 @@ text-center {
     margin: 20px auto;
 }
 
-.atendimentos-column-div {
+.column-div {
     display: flex;
     justify-content: center;
 }
 
-.atendimento-column-header,
-.atendimento-column-cell {
+.column-header,
+.column-cell {
     flex: 1;
     padding: 10px;
     background-color: rgb(0 255 240 / 10%);
@@ -118,22 +118,28 @@ text-center {
     box-sizing: border-box;
 }
 
-.atendimento-column-cell:nth-child(1),
-.atendimento-column-header:nth-child(1) {
+.column-cell:hover {
+    background-color: var(--cinza);
+    transition: 500ms;
+    cursor: pointer;
+}
+
+.column-cell:nth-child(1),
+.column-header:nth-child(1) {
     flex: 0 0 20%;
 }
 
-.atendimento-column-cell:nth-child(2),
-.atendimento-column-header:nth-child(2) {
+.column-cell:nth-child(2),
+.column-header:nth-child(2) {
     flex: 0 0 20%;
 }
 
-.atendimento-column-cell:nth-child(3),
-.atendimento-column-header:nth-child(3) {
+.column-cell:nth-child(3),
+.column-header:nth-child(3) {
     flex: 0 0 60%;
 }
 
-.atendimento-column-cell {
+.column-cell {
     background-color: transparent;
     white-space: nowrap;
     overflow-x: auto;
@@ -141,15 +147,9 @@ text-center {
     text-decoration: none;
 }
 
-.atendimento-row-cell {
+.row-cell {
     display: flex;
     justify-content: center;
-}
-
-.atendimento-row-cell:hover {
-    background-color: var(--cinza);
-    transition: 500ms;
-    cursor: pointer;
 }
 
 ::-webkit-scrollbar {

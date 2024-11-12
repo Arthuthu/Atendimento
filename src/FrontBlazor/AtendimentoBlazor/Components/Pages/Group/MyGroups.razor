@@ -6,15 +6,15 @@
     <Authorized>
         @if (GroupsList is not null && GroupsList.Count > 0)
         {
-            <div class="atendimentos-div">
-                <div class="atendimentos-column-div">
-                    <div class="atendimento-column-header">Grupo</div>
+            <div class="page-div">
+                <div class="column-div">
+                    <div class="column-header">Grupo</div>
                 </div>
                 <div style="display: flex; justify-content: center; flex-direction: column;">
                     @foreach (var group in GroupsList)
                     {
-                        <div class="atendimento-row-cell">
-                            <a class="atendimento-column-cell" href="/group/@group.Id">@group.Name</a>
+                        <div class="row-cell">
+                            <a class="column-cell" href="/group/@group.Id">@group.Name</a>
                         </div>
                     }
                 </div>
