@@ -7,18 +7,28 @@
     <Authorized>
         @if (Group is not null)
         {
-            <div class="segoe-ui-padrao"  style="color: #FFF; text-align: center;">
-                @Group.Name
-            </div>
-            @if (GroupUsers is not null && GroupUsers.Count > 0)
-            {
-                @foreach (var user in GroupUsers)
-                {
-                    <div class="segoe-ui-padrao" style="text-align: center; color: #FFF; margin-top: 20px;">
-                        @user.Username
+            <div class="page-div">
+                <div class="column-div">
+                    <div class="column-header">Grupo</div>
+                </div>
+                <div class="column-div">
+                    <div class="column-cell">
+                        @Group.Name
                     </div>
+                </div>
+                <div class="column-div" style="margin-top: 30px;">
+                    <div class="column-header">Usuários</div>
+                </div>
+                @if (GroupUsers is not null && GroupUsers.Count > 0)
+                {
+                    @foreach (var user in GroupUsers)
+                    {
+                        <div class="row-cell">
+                            <a class="column-cell">@user.Username</a>
+                        </div>
+                    }
                 }
-            }
+            </div>
         }
     </Authorized>
 </AuthorizeView>
